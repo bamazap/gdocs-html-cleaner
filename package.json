@@ -1,0 +1,22 @@
+{
+  "name": "gdocs2stellar",
+  "version": "1.0.0",
+  "description": "Google Drive -> Ugly HTML -> Clean HTML -> Stellar",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bamazap/gdocs2stellar.git"
+  },
+  "author": "Barry McNamara",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bamazap/gdocs2stellar/issues"
+  },
+  "homepage": "https://github.com/bamazap/gdocs2stellar#readme",
+  "dependencies": {
+    "argparse": "^1.0.10"
+  }
+}
