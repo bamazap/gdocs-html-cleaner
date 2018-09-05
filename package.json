@@ -4,7 +4,8 @@
   "description": "Google Drive -> Ugly HTML -> Clean HTML -> Stellar",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,10 @@
   "homepage": "https://github.com/bamazap/gdocs2stellar#readme",
   "dependencies": {
     "argparse": "^1.0.10"
+  },
+  "devDependencies": {
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
   }
 }
