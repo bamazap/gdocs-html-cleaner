@@ -1,7 +1,7 @@
 {
-  "name": "gdocs2stellar",
+  "name": "gdocs-html-cleaner",
   "version": "1.0.0",
-  "description": "Google Drive -> Ugly HTML -> Clean HTML -> Stellar",
+  "description": "Google Drive outputs ugly HTML. This cleans it.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bamazap/gdocs2stellar.git"
+    "url": "git+https://github.com/bamazap/gdocs-html-cleaner.git"
   },
   "author": "Barry McNamara",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bamazap/gdocs2stellar/issues"
+    "url": "https://github.com/bamazap/gdocs-html-cleaner/issues"
   },
-  "homepage": "https://github.com/bamazap/gdocs2stellar#readme",
+  "homepage": "https://github.com/bamazap/gdocs-html-cleaner#readme",
   "dependencies": {
     "argparse": "^1.0.10",
     "cheerio": "^1.0.0-rc.2",
