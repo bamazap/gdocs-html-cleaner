@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const cheerio = require('cheerio');
 const { ArgumentParser } = require('argparse');
 
 const parser = new ArgumentParser({
@@ -24,3 +25,48 @@ const args = parser.parseArgs();
 
 const infilePath = path.resolve(args.infile);
 const dirtyHTML = fs.readFileSync(infilePath, { encoding: 'utf8' });
+const $ = cheerio.load(dirtyHTML);
+
+const toRemove = [
+  'meta',
+  'style',
+];
+
+const attrToClear = [
+  'class',
+  'id',
+  'style',
+];
+
+for (let hLevel = 5; hLevel >= 0; hLevel -= 1) {
+  $(`h${hLevel}`).each((i, elm) => {
+    elm.tagName = `h${hLevel + 1}`;
+  });
+}
+$('.title').each((i, elm) => {
+  elm.tagName = 'h1';
+});
+
+$('h1, h2, h3, h4, h5, h6').find('span').replaceWith(function () {
+  return $(this).text();
+});
+
+$('span').each(function (i, elm) {
+  const $span = $(this);
+  if ($span.css('font-weight') === '700') { // FIXME: does not read css
+    elm.tagName = 'strong';
+  } else {
+    $span.replaceWith($span.text());
+  }
+});
+
+toRemove.forEach((selector) => {
+  $(selector).remove();
+});
+
+attrToClear.forEach((attr) => {
+  $('*').removeAttr(attr);
+});
+
+// eslint-disable-next-line no-console
+console.log($('body').html());
