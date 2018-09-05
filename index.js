@@ -15,13 +15,6 @@ parser.addArgument(
     help: 'Input HTML file',
   },
 );
-parser.addArgument(
-  'outfile',
-  {
-    help: 'Output HTML file',
-  },
-);
-
 const args = parser.parseArgs();
 
 const infilePath = path.resolve(args.infile);
