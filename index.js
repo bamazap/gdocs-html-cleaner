@@ -47,15 +47,30 @@ $('.title').each((i, elm) => {
 });
 
 $('h1, h2, h3, h4, h5, h6').find('span').replaceWith(function () {
-  return $(this).text();
+  return $(this).html();
 });
+
+function isBold($elm) {
+  return $elm.css('font-weight') === '700';
+}
+
+function isItalic($elm) {
+  return $elm.css('font-style') === 'italic';
+}
 
 $('span').each(function (i, elm) {
   const $span = $(this);
-  if ($span.css('font-weight') === '700') {
+  const italic = isItalic($span);
+  const bold = isBold($span);
+  if (bold && italic) {
     elm.tagName = 'strong';
+    $span.innerHTML = `<em>${$span.html()}</em>`;
+  } else if (bold) {
+    elm.tagName = 'strong';
+  } else if (italic) {
+    elm.tagName = 'em';
   } else {
-    $span.replaceWith($span.text());
+    $span.replaceWith($span.html());
   }
 });
 
