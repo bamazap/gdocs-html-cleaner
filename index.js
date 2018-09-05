@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const cheerio = require('cheerio');
+const juice = require('juice');
 const { ArgumentParser } = require('argparse');
 
 const parser = new ArgumentParser({
@@ -25,7 +26,8 @@ const args = parser.parseArgs();
 
 const infilePath = path.resolve(args.infile);
 const dirtyHTML = fs.readFileSync(infilePath, { encoding: 'utf8' });
-const $ = cheerio.load(dirtyHTML);
+const juicyHTML = juice(dirtyHTML);
+const $ = cheerio.load(juicyHTML);
 
 const toRemove = [
   'meta',
@@ -37,6 +39,10 @@ const attrToClear = [
   'id',
   'style',
 ];
+
+const textToReplace = {
+  '&#xA0;': ' ',
+};
 
 for (let hLevel = 5; hLevel >= 0; hLevel -= 1) {
   $(`h${hLevel}`).each((i, elm) => {
@@ -53,7 +59,7 @@ $('h1, h2, h3, h4, h5, h6').find('span').replaceWith(function () {
 
 $('span').each(function (i, elm) {
   const $span = $(this);
-  if ($span.css('font-weight') === '700') { // FIXME: does not read css
+  if ($span.css('font-weight') === '700') {
     elm.tagName = 'strong';
   } else {
     $span.replaceWith($span.text());
@@ -68,5 +74,10 @@ attrToClear.forEach((attr) => {
   $('*').removeAttr(attr);
 });
 
+let cleanHTML = $('body').html();
+Object.entries(textToReplace).forEach(([find, replace]) => {
+  cleanHTML = cleanHTML.replace(new RegExp(find, 'g'), replace);
+});
+
 // eslint-disable-next-line no-console
-console.log($('body').html());
+console.log(cleanHTML);

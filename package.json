@@ -19,7 +19,8 @@
   "homepage": "https://github.com/bamazap/gdocs2stellar#readme",
   "dependencies": {
     "argparse": "^1.0.10",
-    "cheerio": "^1.0.0-rc.2"
+    "cheerio": "^1.0.0-rc.2",
+    "juice": "^4.3.2"
   },
   "devDependencies": {
     "eslint": "^5.5.0",
